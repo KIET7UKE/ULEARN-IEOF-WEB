@@ -1,0 +1,234 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Brand Theme - Dark Red based on logo */
+  --brand-primary: oklch(0.55 0.24 25); /* Dark Red */
+  --brand-secondary: oklch(0.62 0.25 25); /* Crimson (slightly brighter red) */
+  --brand-accent: oklch(0.26 0 0); /* Neutral Dark for headings */
+
+  /* Map brand -> semantic tokens */
+  --primary: var(--brand-primary);
+  --secondary: var(--brand-secondary);
+  --accent: var(--brand-secondary);
+  --foreground: var(--brand-accent);
+
+  /* Neutrals */
+  --background: oklch(1 0 0); /* white */
+  --card: oklch(0.98 0.01 0);
+  --card-foreground: var(--brand-accent);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--brand-accent);
+
+  /* Text contrast on brand */
+  --primary-foreground: oklch(0.99 0 0); /* white */
+  --secondary-foreground: oklch(0.99 0 0); /* white */
+
+  /* Supporting tokens */
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.4 0 0);
+  --destructive: oklch(0.48 0.22 25); /* red */
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.97 0 0);
+  --ring: color-mix(in oklch, var(--brand-secondary) 40%, transparent);
+
+  /* Charts (tints/tones of brand + neutrals) */
+  --chart-1: var(--brand-primary);
+  --chart-2: var(--brand-secondary);
+  --chart-3: oklch(0.92 0 0);
+  --chart-4: oklch(0.3 0 0);
+  --chart-5: oklch(0.99 0 0);
+
+  --radius: 0.5rem;
+
+  /* Sidebar */
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--brand-accent);
+  --sidebar-primary: var(--brand-primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--muted);
+  --sidebar-accent-foreground: var(--brand-accent);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+.dark {
+  /* dark mode tuned for dark red brand */
+  --background: oklch(0.16 0 0);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.16 0 0);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.16 0 0);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: var(--brand-secondary);
+  --primary-foreground: oklch(0.12 0 0);
+  --secondary: var(--brand-primary);
+  --secondary-foreground: oklch(0.12 0 0);
+  --muted: oklch(0.22 0 0);
+  --muted-foreground: oklch(0.78 0 0);
+  --accent: var(--brand-secondary);
+  --accent-foreground: oklch(0.12 0 0);
+  --destructive: oklch(0.42 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.24 0 0);
+  --input: oklch(0.24 0 0);
+  --ring: color-mix(in oklch, var(--brand-secondary) 40%, transparent);
+  --sidebar: oklch(0.18 0 0);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: var(--brand-secondary);
+  --sidebar-primary-foreground: oklch(0.12 0 0);
+  --sidebar-accent: oklch(0.22 0 0);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.24 0 0);
+  --sidebar-ring: var(--ring);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Added custom animations for scroll effects */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.animate-on-scroll.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Abstract background utilities for sections */
+.bg-aurora {
+  position: relative;
+  isolation: isolate;
+}
+.bg-aurora::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  background: radial-gradient(
+      50% 40% at 20% 10%,
+      color-mix(in oklch, var(--brand-secondary) 20%, transparent) 0%,
+      transparent 60%
+    ),
+    radial-gradient(35% 30% at 80% 20%, color-mix(in oklch, var(--brand-primary) 18%, transparent) 0%, transparent 60%),
+    radial-gradient(30% 25% at 50% 80%, color-mix(in oklch, var(--brand-primary) 12%, transparent) 0%, transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.bg-grid-soft {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    color-mix(in oklch, var(--brand-accent) 12%, transparent) 1px,
+    transparent 0
+  );
+  background-size: 22px 22px;
+  mask-image: radial-gradient(70% 50% at 50% 40%, black 40%, transparent 100%);
+}
+
+/* Soft card elevation for glass-like hero text blocks */
+.glass-soft {
+  background: color-mix(in oklch, white 70%, transparent);
+  backdrop-filter: saturate(120%) blur(6px);
+  -webkit-backdrop-filter: saturate(120%) blur(6px);
+  border: 1px solid color-mix(in oklch, var(--border) 60%, transparent);
+  border-radius: 16px;
+}

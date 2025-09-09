@@ -97,7 +97,7 @@ export function Navigation() {
 
             {/* Right side icons */}
             <div className="flex items-center space-x-4">
-              <Button
+              {/* <Button
                 variant="ghost"
                 size="sm"
                 className="text-white hover:text-gray-300"
@@ -110,7 +110,7 @@ export function Navigation() {
                 className="text-white hover:text-gray-300"
               >
                 <User className="w-5 h-5" />
-              </Button>
+              </Button> */}
               <Button
                 className="bg-red-600 hover:bg-red-700 text-white px-6"
                 onClick={() => setIsRegistrationModalOpen(true)}
@@ -172,7 +172,7 @@ export function Navigation() {
       </nav>
 
       {/* Chat Widget */}
-      <div className="fixed bottom-6 right-6 z-50">
+      {/* <div className="fixed bottom-6 right-6 z-50">
         <div className="bg-red-600 text-white p-4 rounded-lg shadow-lg flex items-center space-x-3 cursor-pointer hover:bg-red-700 transition-colors">
           <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
             <MessageCircle className="w-6 h-6 text-red-600" />
@@ -182,7 +182,7 @@ export function Navigation() {
             <p className="text-xs opacity-90">How can we help you?</p>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <RegistrationModal
         isOpen={isRegistrationModalOpen}

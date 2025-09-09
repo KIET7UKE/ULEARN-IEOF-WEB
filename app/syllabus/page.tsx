@@ -113,9 +113,9 @@ export default function SyllabusPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div className="w-full">
               <ScrollAnimation animation="slideInLeft">
-                <Card className="p-8">
+                <Card className="p-8 w-full">
                   <CardHeader className="text-center">
                     <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                       <Key className="w-8 h-8 text-primary" />

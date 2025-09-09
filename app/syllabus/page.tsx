@@ -1,14 +1,22 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
-import { ScrollAnimation } from "@/components/scroll-animation"
-import { RegistrationModal } from "@/components/registration-modal"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useState } from "react";
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
+import { ScrollAnimation } from "@/components/scroll-animation";
+import { RegistrationModal } from "@/components/registration-modal";
+import { GradeCodeModal } from "@/components/grade-code-modal";
+import { GradeSyllabusAccess } from "@/components/grade-syllabus-access";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   BookOpen,
   Download,
@@ -22,17 +30,47 @@ import {
   Brain,
   Star,
   ShoppingCart,
-} from "lucide-react"
+  Key,
+  Lock,
+  AlertCircle,
+} from "lucide-react";
 
 export default function SyllabusPage() {
-  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false)
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
+  const [isGradeCodeModalOpen, setIsGradeCodeModalOpen] = useState(false);
+  const [selectedGrade, setSelectedGrade] = useState<number | null>(null);
 
   const gradeGroups = [
     { id: "1-3", label: "Grades 1-3", description: "Foundation Level" },
     { id: "4-6", label: "Grades 4-6", description: "Elementary Level" },
     { id: "7-8", label: "Grades 7-8", description: "Intermediate Level" },
     { id: "9-10", label: "Grades 9-10", description: "Advanced Level" },
-  ]
+  ];
+
+  const handleGradeCodeValidated = (grade: number) => {
+    setSelectedGrade(grade);
+    setIsGradeCodeModalOpen(false);
+  };
+
+  const handleBackToSelection = () => {
+    setSelectedGrade(null);
+  };
+
+  // If a grade is selected, show the grade-specific syllabus access
+  if (selectedGrade) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <GradeSyllabusAccess
+            grade={selectedGrade}
+            onBack={handleBackToSelection}
+          />
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -42,12 +80,81 @@ export default function SyllabusPage() {
       <section className="relative bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation className="text-center space-y-8">
-            <Badge className="bg-secondary text-secondary-foreground text-lg px-6 py-2">Syllabus & Preparation</Badge>
-            <h1 className="text-4xl lg:text-6xl font-bold text-foreground text-balance">Comprehensive Study Guide</h1>
+            <Badge className="bg-secondary text-secondary-foreground text-lg px-6 py-2">
+              Syllabus & Preparation
+            </Badge>
+            <h1 className="text-4xl lg:text-6xl font-bold text-foreground text-balance">
+              Comprehensive Study Guide
+            </h1>
             <p className="text-xl text-muted-foreground max-w-4xl mx-auto text-pretty">
-              Detailed syllabus, practice materials, and preparation strategies for the Global English Olympiad 2025.
-              Everything you need to excel in both Level 1 and Level 2 examinations.
+              Detailed syllabus, practice materials, and preparation strategies
+              for the Global English Olympiad 2025. Everything you need to excel
+              in both Level 1 and Level 2 examinations.
             </p>
+          </ScrollAnimation>
+        </div>
+      </section>
+
+      {/* Grade Code Access Section */}
+      <section className="py-20 bg-gradient-to-br from-primary/5 to-secondary/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollAnimation className="text-center space-y-8">
+            <div className="space-y-4">
+              <div className="flex items-center justify-center space-x-2">
+                <Key className="w-8 h-8 text-primary" />
+                <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance">
+                  Access Your Grade-Specific Syllabus
+                </h2>
+              </div>
+              <p className="text-xl text-muted-foreground max-w-4xl mx-auto text-pretty">
+                Students can access their grade-specific syllabus content using
+                unique global codes. These codes are provided by schools and
+                grant access only to syllabus materials.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <ScrollAnimation animation="slideInLeft">
+                <Card className="p-8">
+                  <CardHeader className="text-center">
+                    <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                      <Key className="w-8 h-8 text-primary" />
+                    </div>
+                    <CardTitle className="text-2xl">Student Access</CardTitle>
+                    <CardDescription className="text-lg">
+                      Enter your unique grade code to access syllabus content
+                      for your specific grade level.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="space-y-3">
+                      {[
+                        "Access grade-specific syllabus content",
+                        "View detailed learning objectives",
+                        "Download syllabus materials",
+                        "Restricted to syllabus only - no lessons or exercises",
+                      ].map((feature, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center space-x-3"
+                        >
+                          <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
+                          <span className="text-foreground">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <Button
+                      onClick={() => setIsGradeCodeModalOpen(true)}
+                      className="w-full bg-primary hover:bg-primary/90"
+                      size="lg"
+                    >
+                      <Key className="w-5 h-5 mr-2" />
+                      Enter Grade Code
+                    </Button>
+                  </CardContent>
+                </Card>
+              </ScrollAnimation>
+            </div>
           </ScrollAnimation>
         </div>
       </section>
@@ -70,8 +177,9 @@ export default function SyllabusPage() {
                   Grade-Specific Syllabus & Practice Booklet
                 </h2>
                 <p className="text-lg text-muted-foreground text-pretty mb-6">
-                  Our comprehensive booklet is designed to help students prepare effectively for both Level 1
-                  (School-Level) and Level 2 (Regional-Level) examinations of the Global English Olympiad.
+                  Our comprehensive booklet is designed to help students prepare
+                  effectively for both Level 1 (School-Level) and Level 2
+                  (Regional-Level) examinations of the Global English Olympiad.
                 </p>
               </div>
 
@@ -95,14 +203,21 @@ export default function SyllabusPage() {
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <h3 className="text-2xl font-bold text-foreground">₹100</h3>
-                    <p className="text-muted-foreground">Per booklet (inclusive of taxes)</p>
+                    <p className="text-muted-foreground">
+                      Per booklet (inclusive of taxes)
+                    </p>
                   </div>
-                  <Button className="bg-secondary hover:bg-secondary/90" onClick={() => setIsSyllabusModalOpen(true)}>
+                  <Button
+                    className="bg-secondary hover:bg-secondary/90"
+                    onClick={() => setIsSyllabusModalOpen(true)}
+                  >
                     <ShoppingCart className="w-5 h-5 mr-2" />
                     Buy Now
                   </Button>
                 </div>
-                <p className="text-sm text-muted-foreground">Secure online payment • Delivered within 7 working days</p>
+                <p className="text-sm text-muted-foreground">
+                  Secure online payment • Delivered within 7 working days
+                </p>
               </div>
             </ScrollAnimation>
           </div>
@@ -113,10 +228,12 @@ export default function SyllabusPage() {
       <section className="py-20 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-balance">What We Assess</h2>
+            <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-balance">
+              What We Assess
+            </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              The Global English Olympiad evaluates comprehensive English language skills through structured assessment
-              areas.
+              The Global English Olympiad evaluates comprehensive English
+              language skills through structured assessment areas.
             </p>
           </ScrollAnimation>
 
@@ -125,25 +242,29 @@ export default function SyllabusPage() {
               {
                 icon: Brain,
                 title: "Comprehension Skills",
-                description: "Understanding and interpreting various types of texts, passages, and literary pieces.",
+                description:
+                  "Understanding and interpreting various types of texts, passages, and literary pieces.",
                 color: "bg-blue-500",
               },
               {
                 icon: PenTool,
                 title: "Grammar & Vocabulary",
-                description: "Mastery of language structure, word usage, and advanced vocabulary application.",
+                description:
+                  "Mastery of language structure, word usage, and advanced vocabulary application.",
                 color: "bg-green-500",
               },
               {
                 icon: MessageCircle,
                 title: "Situational Conversation",
-                description: "Practical English for real-life scenarios and effective communication skills.",
+                description:
+                  "Practical English for real-life scenarios and effective communication skills.",
                 color: "bg-primary",
               },
               {
                 icon: FileText,
                 title: "Writing Skills",
-                description: "Creative and analytical writing abilities, including essays and structured responses.",
+                description:
+                  "Creative and analytical writing abilities, including essays and structured responses.",
                 color: "bg-secondary",
               },
             ].map((area, index) => (
@@ -158,7 +279,9 @@ export default function SyllabusPage() {
                     <CardTitle className="text-lg">{area.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <CardDescription className="text-base text-center">{area.description}</CardDescription>
+                    <CardDescription className="text-base text-center">
+                      {area.description}
+                    </CardDescription>
                   </CardContent>
                 </Card>
               </ScrollAnimation>
@@ -168,14 +291,15 @@ export default function SyllabusPage() {
       </section>
 
       {/* Grade-wise Syllabus */}
-      <section className="py-20">
+      {/* <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-balance">
               Grade-wise Syllabus Breakdown
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              Detailed curriculum designed to match each grade level's learning objectives and capabilities.
+              Detailed curriculum designed to match each grade level's learning
+              objectives and capabilities.
             </p>
           </ScrollAnimation>
 
@@ -184,16 +308,25 @@ export default function SyllabusPage() {
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                 <TabsList className="grid w-full md:w-auto grid-cols-2 lg:grid-cols-4">
                   {gradeGroups.map((group) => (
-                    <TabsTrigger key={group.id} value={group.id} className="text-center">
+                    <TabsTrigger
+                      key={group.id}
+                      value={group.id}
+                      className="text-center"
+                    >
                       <div>
                         <div className="font-semibold">{group.label}</div>
-                        <div className="text-xs text-muted-foreground">{group.description}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {group.description}
+                        </div>
                       </div>
                     </TabsTrigger>
                   ))}
                 </TabsList>
                 <div className="flex gap-3">
-                  <Button className="bg-secondary hover:bg-secondary/90" onClick={() => setIsSyllabusModalOpen(true)}>
+                  <Button
+                    className="bg-secondary hover:bg-secondary/90"
+                    onClick={() => setIsSyllabusModalOpen(true)}
+                  >
                     Buy Booklet ₹100
                   </Button>
                   <Button variant="outline" asChild>
@@ -202,7 +335,6 @@ export default function SyllabusPage() {
                 </div>
               </div>
 
-              {/* Grades 1-3 Content */}
               <TabsContent value="1-3" className="space-y-6">
                 <Card>
                   <CardHeader>
@@ -211,7 +343,8 @@ export default function SyllabusPage() {
                       <span>Grades 1-3: Foundation Level</span>
                     </CardTitle>
                     <CardDescription>
-                      Building strong English fundamentals through engaging and age-appropriate content.
+                      Building strong English fundamentals through engaging and
+                      age-appropriate content.
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
@@ -230,9 +363,14 @@ export default function SyllabusPage() {
                             "Basic grammar concepts",
                             "Rhymes and simple poems",
                           ].map((topic, index) => (
-                            <li key={index} className="flex items-center space-x-2">
+                            <li
+                              key={index}
+                              className="flex items-center space-x-2"
+                            >
                               <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                              <span className="text-sm text-muted-foreground">{topic}</span>
+                              <span className="text-sm text-muted-foreground">
+                                {topic}
+                              </span>
                             </li>
                           ))}
                         </ul>
@@ -244,21 +382,33 @@ export default function SyllabusPage() {
                         </h4>
                         <div className="space-y-3">
                           <div className="bg-muted rounded-lg p-3">
-                            <div className="font-medium text-foreground">Duration: 45 minutes</div>
-                            <div className="text-sm text-muted-foreground">Total Questions: 30</div>
+                            <div className="font-medium text-foreground">
+                              Duration: 45 minutes
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              Total Questions: 30
+                            </div>
                           </div>
                           <div className="space-y-2">
                             <div className="flex justify-between">
                               <span className="text-sm">Multiple Choice</span>
-                              <span className="text-sm font-medium">20 questions</span>
+                              <span className="text-sm font-medium">
+                                20 questions
+                              </span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-sm">Fill in the blanks</span>
-                              <span className="text-sm font-medium">5 questions</span>
+                              <span className="text-sm">
+                                Fill in the blanks
+                              </span>
+                              <span className="text-sm font-medium">
+                                5 questions
+                              </span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-sm">Picture-based</span>
-                              <span className="text-sm font-medium">5 questions</span>
+                              <span className="text-sm font-medium">
+                                5 questions
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -273,7 +423,6 @@ export default function SyllabusPage() {
                 </Card>
               </TabsContent>
 
-              {/* Grades 4-6 Content */}
               <TabsContent value="4-6" className="space-y-6">
                 <Card>
                   <CardHeader>
@@ -282,7 +431,8 @@ export default function SyllabusPage() {
                       <span>Grades 4-6: Elementary Level</span>
                     </CardTitle>
                     <CardDescription>
-                      Developing intermediate English skills with focus on comprehension and expression.
+                      Developing intermediate English skills with focus on
+                      comprehension and expression.
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
@@ -301,9 +451,14 @@ export default function SyllabusPage() {
                             "Punctuation and capitalization",
                             "Story sequencing and completion",
                           ].map((topic, index) => (
-                            <li key={index} className="flex items-center space-x-2">
+                            <li
+                              key={index}
+                              className="flex items-center space-x-2"
+                            >
                               <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                              <span className="text-sm text-muted-foreground">{topic}</span>
+                              <span className="text-sm text-muted-foreground">
+                                {topic}
+                              </span>
                             </li>
                           ))}
                         </ul>
@@ -315,21 +470,31 @@ export default function SyllabusPage() {
                         </h4>
                         <div className="space-y-3">
                           <div className="bg-muted rounded-lg p-3">
-                            <div className="font-medium text-foreground">Duration: 60 minutes</div>
-                            <div className="text-sm text-muted-foreground">Total Questions: 40</div>
+                            <div className="font-medium text-foreground">
+                              Duration: 60 minutes
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              Total Questions: 40
+                            </div>
                           </div>
                           <div className="space-y-2">
                             <div className="flex justify-between">
                               <span className="text-sm">Multiple Choice</span>
-                              <span className="text-sm font-medium">25 questions</span>
+                              <span className="text-sm font-medium">
+                                25 questions
+                              </span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-sm">Comprehension</span>
-                              <span className="text-sm font-medium">10 questions</span>
+                              <span className="text-sm font-medium">
+                                10 questions
+                              </span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-sm">Writing Tasks</span>
-                              <span className="text-sm font-medium">5 questions</span>
+                              <span className="text-sm font-medium">
+                                5 questions
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -344,7 +509,6 @@ export default function SyllabusPage() {
                 </Card>
               </TabsContent>
 
-              {/* Grades 7-8 Content */}
               <TabsContent value="7-8" className="space-y-6">
                 <Card>
                   <CardHeader>
@@ -353,7 +517,8 @@ export default function SyllabusPage() {
                       <span>Grades 7-8: Intermediate Level</span>
                     </CardTitle>
                     <CardDescription>
-                      Advanced language skills with emphasis on critical thinking and analysis.
+                      Advanced language skills with emphasis on critical
+                      thinking and analysis.
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
@@ -372,9 +537,14 @@ export default function SyllabusPage() {
                             "Literature appreciation",
                             "Formal and informal communication",
                           ].map((topic, index) => (
-                            <li key={index} className="flex items-center space-x-2">
+                            <li
+                              key={index}
+                              className="flex items-center space-x-2"
+                            >
                               <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                              <span className="text-sm text-muted-foreground">{topic}</span>
+                              <span className="text-sm text-muted-foreground">
+                                {topic}
+                              </span>
                             </li>
                           ))}
                         </ul>
@@ -386,21 +556,31 @@ export default function SyllabusPage() {
                         </h4>
                         <div className="space-y-3">
                           <div className="bg-muted rounded-lg p-3">
-                            <div className="font-medium text-foreground">Duration: 75 minutes</div>
-                            <div className="text-sm text-muted-foreground">Total Questions: 50</div>
+                            <div className="font-medium text-foreground">
+                              Duration: 75 minutes
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              Total Questions: 50
+                            </div>
                           </div>
                           <div className="space-y-2">
                             <div className="flex justify-between">
                               <span className="text-sm">Multiple Choice</span>
-                              <span className="text-sm font-medium">30 questions</span>
+                              <span className="text-sm font-medium">
+                                30 questions
+                              </span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-sm">Comprehension</span>
-                              <span className="text-sm font-medium">15 questions</span>
+                              <span className="text-sm font-medium">
+                                15 questions
+                              </span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-sm">Essay Writing</span>
-                              <span className="text-sm font-medium">5 questions</span>
+                              <span className="text-sm font-medium">
+                                5 questions
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -415,7 +595,6 @@ export default function SyllabusPage() {
                 </Card>
               </TabsContent>
 
-              {/* Grades 9-10 Content */}
               <TabsContent value="9-10" className="space-y-6">
                 <Card>
                   <CardHeader>
@@ -424,7 +603,8 @@ export default function SyllabusPage() {
                       <span>Grades 9-10: Advanced Level</span>
                     </CardTitle>
                     <CardDescription>
-                      Mastery-level English skills preparing students for higher education and global communication.
+                      Mastery-level English skills preparing students for higher
+                      education and global communication.
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
@@ -443,9 +623,14 @@ export default function SyllabusPage() {
                             "Literary criticism and interpretation",
                             "Professional communication skills",
                           ].map((topic, index) => (
-                            <li key={index} className="flex items-center space-x-2">
+                            <li
+                              key={index}
+                              className="flex items-center space-x-2"
+                            >
                               <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                              <span className="text-sm text-muted-foreground">{topic}</span>
+                              <span className="text-sm text-muted-foreground">
+                                {topic}
+                              </span>
                             </li>
                           ))}
                         </ul>
@@ -457,21 +642,31 @@ export default function SyllabusPage() {
                         </h4>
                         <div className="space-y-3">
                           <div className="bg-muted rounded-lg p-3">
-                            <div className="font-medium text-foreground">Duration: 90 minutes</div>
-                            <div className="text-sm text-muted-foreground">Total Questions: 60</div>
+                            <div className="font-medium text-foreground">
+                              Duration: 90 minutes
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              Total Questions: 60
+                            </div>
                           </div>
                           <div className="space-y-2">
                             <div className="flex justify-between">
                               <span className="text-sm">Multiple Choice</span>
-                              <span className="text-sm font-medium">35 questions</span>
+                              <span className="text-sm font-medium">
+                                35 questions
+                              </span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-sm">Comprehension</span>
-                              <span className="text-sm font-medium">15 questions</span>
+                              <span className="text-sm font-medium">
+                                15 questions
+                              </span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-sm">Essay & Analysis</span>
-                              <span className="text-sm font-medium">10 questions</span>
+                              <span className="text-sm font-medium">
+                                10 questions
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -480,7 +675,9 @@ export default function SyllabusPage() {
                   </CardContent>
                   <div className="flex gap-3 px-1">
                     <Button variant="outline" asChild>
-                      <a href="/api/syllabus?grade=9-10">Free Download (9–10)</a>
+                      <a href="/api/syllabus?grade=9-10">
+                        Free Download (9–10)
+                      </a>
                     </Button>
                   </div>
                 </Card>
@@ -488,15 +685,18 @@ export default function SyllabusPage() {
             </Tabs>
           </ScrollAnimation>
         </div>
-      </section>
+      </section> */}
 
       {/* Preparation Tips */}
       <section className="py-20 bg-gradient-to-br from-secondary/5 to-primary/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-balance">Preparation Strategies</h2>
+            <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-balance">
+              Preparation Strategies
+            </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              Expert tips and proven strategies to help students excel in the Global English Olympiad.
+              Expert tips and proven strategies to help students excel in the
+              Global English Olympiad.
             </p>
           </ScrollAnimation>
 
@@ -574,9 +774,14 @@ export default function SyllabusPage() {
                   <CardContent>
                     <ul className="space-y-2">
                       {strategy.tips.map((tip, tipIndex) => (
-                        <li key={tipIndex} className="flex items-start space-x-2">
+                        <li
+                          key={tipIndex}
+                          className="flex items-start space-x-2"
+                        >
                           <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                          <span className="text-sm text-muted-foreground">{tip}</span>
+                          <span className="text-sm text-muted-foreground">
+                            {tip}
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -589,15 +794,16 @@ export default function SyllabusPage() {
       </section>
 
       {/* Download CTA */}
-      <section className="py-20 bg-primary">
+      {/* <section className="py-20 bg-primary">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollAnimation className="space-y-8">
             <h2 className="text-3xl lg:text-5xl font-bold text-primary-foreground text-balance">
               Get Your Syllabus Booklet Today
             </h2>
             <p className="text-xl text-primary-foreground/90 text-pretty">
-              Don't leave your preparation to chance. Get the official syllabus booklet with practice questions, sample
-              tests, and detailed preparation guidelines for just ₹100.
+              Don't leave your preparation to chance. Get the official syllabus
+              booklet with practice questions, sample tests, and detailed
+              preparation guidelines for just ₹100.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -627,18 +833,31 @@ export default function SyllabusPage() {
                 { label: "All Grades", value: "1 to 10 Available" },
               ].map((item, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-lg font-bold text-primary-foreground">{item.value}</div>
-                  <div className="text-primary-foreground/80 text-sm">{item.label}</div>
+                  <div className="text-lg font-bold text-primary-foreground">
+                    {item.value}
+                  </div>
+                  <div className="text-primary-foreground/80 text-sm">
+                    {item.label}
+                  </div>
                 </div>
               ))}
             </div>
           </ScrollAnimation>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
 
-      <RegistrationModal isOpen={isSyllabusModalOpen} onClose={() => setIsSyllabusModalOpen(false)} type="syllabus" />
+      <RegistrationModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        type="syllabus"
+      />
+      <GradeCodeModal
+        isOpen={isGradeCodeModalOpen}
+        onClose={() => setIsGradeCodeModalOpen(false)}
+        onCodeValidated={handleGradeCodeValidated}
+      />
     </div>
-  )
+  );
 }

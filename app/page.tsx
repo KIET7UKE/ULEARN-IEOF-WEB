@@ -46,8 +46,8 @@ export default function HomePage() {
     "@type": "EducationalOrganization",
     name: "International English Olympiad Foundation (IEOF)",
     alternateName: "IEOF",
-    url: "https://ieof.in",
-    logo: "https://ieof.in/ieof-logo.png",
+    url: "https://www.ieofoundation.org",
+    logo: "https://www.ieofoundation.org/ieof-logo.png",
     description:
       "India's first offline International English Olympiad Foundation conducting Global English Olympiad (GEO) for Grades 1-10 with cash prizes and Dubai trips.",
     foundingDate: "2020",
@@ -97,7 +97,7 @@ export default function HomePage() {
       organizer: {
         "@type": "Organization",
         name: "International English Olympiad Foundation (IEOF)",
-        url: "https://ieof.in",
+        url: "https://www.ieofoundation.org",
       },
       offers: {
         "@type": "Offer",

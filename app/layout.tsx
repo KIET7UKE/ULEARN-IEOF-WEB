@@ -39,14 +39,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://ieof.in"),
+  metadataBase: new URL("https://www.ieofoundation.org"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://ieof.in",
+    url: "https://www.ieofoundation.org",
     siteName: "IEOF - International English Olympiad Foundation",
     title:
       "IEOF - International English Olympiad Foundation | Global English Olympiad (GEO)",
@@ -100,7 +100,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="canonical" href="https://ieof.in" />
+        <link rel="canonical" href="https://www.ieofoundation.org" />
         <meta
           name="google-site-verification"
           content="your-google-verification-code"

@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://ieof.in"; // Replace with your actual domain
+  const baseUrl = "https://www.ieofoundation.org"; // Updated to correct domain
   const currentDate = new Date();
 
   return [

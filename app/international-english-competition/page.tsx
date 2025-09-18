@@ -19,6 +19,7 @@ import {
   Star,
   CheckCircle,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "International English Competition - Global English Olympiad | IEOF",

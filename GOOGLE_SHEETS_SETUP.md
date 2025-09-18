@@ -1,5 +1,5 @@
 # Google Sheets Integration Setup Guide
-
+##
 ## Step 1: Create a Google Sheet
 
 1. Go to [Google Sheets](https://sheets.google.com)

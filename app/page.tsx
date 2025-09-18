@@ -40,8 +40,84 @@ export default function HomePage() {
   const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
   const introVideo = process.env.NEXT_PUBLIC_INTRO_VIDEO_URL;
 
+  // Structured Data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    name: "International English Olympiad Foundation (IEOF)",
+    alternateName: "IEOF",
+    url: "https://ieof.in",
+    logo: "https://ieof.in/ieof-logo.png",
+    description:
+      "India's first offline International English Olympiad Foundation conducting Global English Olympiad (GEO) for Grades 1-10 with cash prizes and Dubai trips.",
+    foundingDate: "2020",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "IN",
+      addressRegion: "India",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "Customer Service",
+      availableLanguage: ["English", "Hindi"],
+    },
+    sameAs: [
+      "https://www.facebook.com/ieof",
+      "https://www.instagram.com/ieof",
+      "https://www.linkedin.com/company/ieof",
+    ],
+    offers: {
+      "@type": "Offer",
+      name: "Global English Olympiad (GEO) Registration",
+      description:
+        "Register for India's first offline International English Olympiad for Grades 1-10",
+      price: "299",
+      priceCurrency: "INR",
+      availability: "https://schema.org/InStock",
+      validFrom: "2025-08-01",
+      validThrough: "2025-10-31",
+    },
+    event: {
+      "@type": "Event",
+      name: "Global English Olympiad (GEO) 2025-26",
+      description:
+        "India's first offline International English Olympiad for Grades 1-10 with cash prizes and Dubai trips",
+      startDate: "2025-10-10",
+      endDate: "2025-12-09",
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: "Multiple Exam Centers across India",
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "IN",
+        },
+      },
+      organizer: {
+        "@type": "Organization",
+        name: "International English Olympiad Foundation (IEOF)",
+        url: "https://ieof.in",
+      },
+      offers: {
+        "@type": "Offer",
+        name: "GEO Registration",
+        price: "299",
+        priceCurrency: "INR",
+        availability: "https://schema.org/InStock",
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
       <Navigation />
 
       {/* Hero Section with Professional Background */}
@@ -63,7 +139,7 @@ export default function HomePage() {
                   <div className="space-y-6">
                     <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
                       Global English Olympiad{" "}
-                      <span className="text-red-500">(GEO)</span>
+                      <span className="text-red-500">(GEO)</span> - IEOF
                     </h1>
 
                     <div className="space-y-4">
@@ -71,6 +147,7 @@ export default function HomePage() {
                         <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                         <span className="text-xl font-semibold">
                           India's First Offline International English Olympiad
+                          Foundation (IEOF)
                         </span>
                       </div>
                       <div className="flex items-center space-x-3">
@@ -303,12 +380,14 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
-              About IEOF
+              About International English Olympiad Foundation (IEOF)
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              The International English Olympiad Foundation (IEOF) is dedicated
-              to promoting excellence in the English language and creating
-              global opportunities for students.
+              The International English Olympiad Foundation (IEOF) is India's
+              leading private education institution dedicated to promoting
+              excellence in the English language and creating global
+              opportunities for students through our Global English Olympiad
+              (GEO) program.
             </p>
           </ScrollAnimation>
 

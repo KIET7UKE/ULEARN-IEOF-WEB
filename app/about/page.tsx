@@ -1,9 +1,56 @@
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
-import { ScrollAnimation } from "@/components/scroll-animation"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Globe, Target, Users, Award, BookOpen, Heart, Lightbulb, Handshake, MapPin, Calendar } from "lucide-react"
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
+import { ScrollAnimation } from "@/components/scroll-animation";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Globe,
+  Target,
+  Users,
+  Award,
+  BookOpen,
+  Heart,
+  Lightbulb,
+  Handshake,
+  MapPin,
+  Calendar,
+} from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About IEOF - International English Olympiad Foundation",
+  description:
+    "Learn about the International English Olympiad Foundation (IEOF), India's leading private education institution conducting Global English Olympiad (GEO) for Grades 1-10 with cash prizes and Dubai trips.",
+  keywords: [
+    "About IEOF",
+    "International English Olympiad Foundation",
+    "IEOF organization",
+    "English Olympiad foundation India",
+    "GEO program",
+    "English education foundation",
+    "IEOF mission vision",
+    "English Olympiad about us",
+  ],
+  openGraph: {
+    title: "About IEOF - International English Olympiad Foundation",
+    description:
+      "Learn about the International English Olympiad Foundation (IEOF), India's leading private education institution conducting Global English Olympiad (GEO) for Grades 1-10.",
+    images: [
+      {
+        url: "/diverse-students-from-different-backgrounds-studyi.png",
+        width: 1200,
+        height: 630,
+        alt: "Students learning English at IEOF",
+      },
+    ],
+  },
+};
 
 export default function AboutPage() {
   return (
@@ -14,13 +61,16 @@ export default function AboutPage() {
       <section className="relative bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation className="text-center space-y-8">
-            <Badge className="bg-secondary text-secondary-foreground text-lg px-6 py-2">About IEOF</Badge>
+            <Badge className="bg-secondary text-secondary-foreground text-lg px-6 py-2">
+              About IEOF
+            </Badge>
             <h1 className="text-4xl lg:text-6xl font-bold text-foreground text-balance">
               International English Olympiad Foundation
             </h1>
             <p className="text-xl text-muted-foreground max-w-4xl mx-auto text-pretty">
-              Dedicated to improving English language proficiency among students across India through structured,
-              competitive, and globally benchmarked programs.
+              Dedicated to improving English language proficiency among students
+              across India through structured, competitive, and globally
+              benchmarked programs.
             </p>
           </ScrollAnimation>
         </div>
@@ -41,18 +91,25 @@ export default function AboutPage() {
             <ScrollAnimation animation="slideInRight" className="space-y-8">
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-3xl font-bold text-foreground mb-4">Our Mission</h2>
+                  <h2 className="text-3xl font-bold text-foreground mb-4">
+                    Our Mission
+                  </h2>
                   <p className="text-lg text-muted-foreground text-pretty">
-                    To empower students with world-class English skills, provide them with global exposure, and reward
-                    excellence with prestigious awards, cash prizes, and international experiences.
+                    To empower students with world-class English skills, provide
+                    them with global exposure, and reward excellence with
+                    prestigious awards, cash prizes, and international
+                    experiences.
                   </p>
                 </div>
 
                 <div>
-                  <h2 className="text-3xl font-bold text-foreground mb-4">Our Vision</h2>
+                  <h2 className="text-3xl font-bold text-foreground mb-4">
+                    Our Vision
+                  </h2>
                   <p className="text-lg text-muted-foreground text-pretty">
-                    To create a platform where every Indian student can showcase their English proficiency on a global
-                    stage and gain recognition that opens doors to international opportunities.
+                    To create a platform where every Indian student can showcase
+                    their English proficiency on a global stage and gain
+                    recognition that opens doors to international opportunities.
                   </p>
                 </div>
               </div>
@@ -60,11 +117,16 @@ export default function AboutPage() {
               <div className="bg-card border border-border rounded-xl p-6">
                 <div className="flex items-center space-x-3 mb-4">
                   <Heart className="w-8 h-8 text-primary" />
-                  <h3 className="text-2xl font-bold text-foreground">Our Motto</h3>
+                  <h3 className="text-2xl font-bold text-foreground">
+                    Our Motto
+                  </h3>
                 </div>
-                <p className="text-xl text-primary font-semibold">"No Child Should Be Left Behind"</p>
+                <p className="text-xl text-primary font-semibold">
+                  "No Child Should Be Left Behind"
+                </p>
                 <p className="text-muted-foreground mt-2">
-                  Every student deserves a stage to shine and showcase their English excellence.
+                  Every student deserves a stage to shine and showcase their
+                  English excellence.
                 </p>
               </div>
             </ScrollAnimation>
@@ -76,9 +138,12 @@ export default function AboutPage() {
       <section className="py-20 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-balance">Our Core Values</h2>
+            <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-balance">
+              Our Core Values
+            </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              The principles that guide our mission to transform English education in India.
+              The principles that guide our mission to transform English
+              education in India.
             </p>
           </ScrollAnimation>
 
@@ -130,7 +195,9 @@ export default function AboutPage() {
                     <CardTitle className="text-xl">{value.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <CardDescription className="text-base">{value.description}</CardDescription>
+                    <CardDescription className="text-base">
+                      {value.description}
+                    </CardDescription>
                   </CardContent>
                 </Card>
               </ScrollAnimation>
@@ -145,14 +212,17 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <ScrollAnimation animation="slideInLeft" className="space-y-8">
               <div>
-                <Badge className="bg-secondary text-secondary-foreground mb-4">International Collaboration</Badge>
+                <Badge className="bg-secondary text-secondary-foreground mb-4">
+                  International Collaboration
+                </Badge>
                 <h2 className="text-3xl lg:text-4xl font-bold text-foreground text-balance mb-6">
                   Partnership with Edufam International Academy, Dubai
                 </h2>
                 <p className="text-lg text-muted-foreground text-pretty mb-6">
-                  Our collaboration with Edufam International Academy brings authentic international exposure right into
-                  Indian classrooms. This partnership ensures that our students receive globally recognized
-                  certification and opportunities.
+                  Our collaboration with Edufam International Academy brings
+                  authentic international exposure right into Indian classrooms.
+                  This partnership ensures that our students receive globally
+                  recognized certification and opportunities.
                 </p>
               </div>
 
@@ -166,7 +236,9 @@ export default function AboutPage() {
                 ].map((benefit, index) => (
                   <div key={index} className="flex items-center space-x-3">
                     <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-primary-foreground text-sm font-bold">{index + 1}</span>
+                      <span className="text-primary-foreground text-sm font-bold">
+                        {index + 1}
+                      </span>
                     </div>
                     <span className="text-foreground">{benefit}</span>
                   </div>
@@ -189,10 +261,12 @@ export default function AboutPage() {
       <section className="py-20 bg-gradient-to-br from-secondary/5 to-primary/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-balance">What We Aim to Achieve</h2>
+            <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-balance">
+              What We Aim to Achieve
+            </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              Through the Global English Olympiad, we work towards specific goals that benefit every participating
-              student.
+              Through the Global English Olympiad, we work towards specific
+              goals that benefit every participating student.
             </p>
           </ScrollAnimation>
 
@@ -222,7 +296,8 @@ export default function AboutPage() {
               {
                 icon: Globe,
                 title: "Global Exposure",
-                description: "Connect Indian students with international opportunities and cross-cultural experiences.",
+                description:
+                  "Connect Indian students with international opportunities and cross-cultural experiences.",
                 color: "bg-secondary",
               },
             ].map((goal, index) => (
@@ -239,7 +314,9 @@ export default function AboutPage() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <CardDescription className="text-base">{goal.description}</CardDescription>
+                    <CardDescription className="text-base">
+                      {goal.description}
+                    </CardDescription>
                   </CardContent>
                 </Card>
               </ScrollAnimation>
@@ -252,10 +329,12 @@ export default function AboutPage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-balance">About Our Organization</h2>
+            <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-balance">
+              About Our Organization
+            </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              Learn more about the International English Olympiad Foundation and our commitment to educational
-              excellence.
+              Learn more about the International English Olympiad Foundation and
+              our commitment to educational excellence.
             </p>
           </ScrollAnimation>
 
@@ -270,7 +349,9 @@ export default function AboutPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">Headquarters</h4>
+                    <h4 className="font-semibold text-foreground mb-2">
+                      Headquarters
+                    </h4>
                     <p className="text-muted-foreground">
                       G–108, Keerthi Apartments
                       <br />
@@ -280,7 +361,9 @@ export default function AboutPage() {
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">Contact Information</h4>
+                    <h4 className="font-semibold text-foreground mb-2">
+                      Contact Information
+                    </h4>
                     <p className="text-muted-foreground">
                       Website: www.ieofoundation.org
                       <br />
@@ -303,24 +386,32 @@ export default function AboutPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">Established</h4>
+                    <h4 className="font-semibold text-foreground mb-2">
+                      Established
+                    </h4>
                     <p className="text-muted-foreground">
-                      Founded with the vision of creating India's first international-standard English competition for
-                      school students.
+                      Founded with the vision of creating India's first
+                      international-standard English competition for school
+                      students.
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">Global Reach</h4>
+                    <h4 className="font-semibold text-foreground mb-2">
+                      Global Reach
+                    </h4>
                     <p className="text-muted-foreground">
-                      Partnered with international institutions to provide authentic global exposure and recognition to
-                      Indian students.
+                      Partnered with international institutions to provide
+                      authentic global exposure and recognition to Indian
+                      students.
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">Future Vision</h4>
+                    <h4 className="font-semibold text-foreground mb-2">
+                      Future Vision
+                    </h4>
                     <p className="text-muted-foreground">
-                      Expanding to reach every corner of India, ensuring no child is left behind in the journey of
-                      English excellence.
+                      Expanding to reach every corner of India, ensuring no
+                      child is left behind in the journey of English excellence.
                     </p>
                   </div>
                 </CardContent>
@@ -332,5 +423,5 @@ export default function AboutPage() {
 
       <Footer />
     </div>
-  )
+  );
 }
